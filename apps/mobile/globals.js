@@ -3,6 +3,7 @@ import "@azure/core-asynciterator-polyfill";
 import "@formatjs/intl-locale/polyfill-force";
 import "@formatjs/intl-pluralrules/polyfill-force";
 import "@formatjs/intl-pluralrules/locale-data/en";
+import "@formatjs/intl-pluralrules/locale-data/zh";
 import "react-native-url-polyfill/auto";
 import "./polyfills/console-time.js";
 import "./app/common/logger/index";

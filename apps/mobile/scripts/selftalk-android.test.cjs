@@ -16,6 +16,7 @@ test("Android installs separately and can build unsigned production APKs", () =>
 test("fresh installs default to Chinese and keep the official sync endpoints", () => {
   assert.match(read("apps/mobile/app/stores/use-setting-store.ts"), /appLanguage: DEFAULT_APP_LANGUAGE/);
   assert.match(read("packages/intl/src/languages.ts"), /DEFAULT_APP_LANGUAGE = "zh-CN"/);
+  assert.match(read("apps/mobile/globals.js"), /intl-pluralrules\/locale-data\/zh/);
   const database = read("apps/mobile/app/common/database/index.ts");
   for (const url of ["https://api.notesnook.com", "https://auth.streetwriters.co", "https://events.streetwriters.co"]) {
     assert.ok(database.includes(url), url);

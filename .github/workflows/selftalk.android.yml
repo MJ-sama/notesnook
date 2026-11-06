@@ -52,6 +52,7 @@ jobs:
         run: |
           npm run tx mobile:build
           npm --prefix packages/intl run test:zh-CN
+          npm --prefix packages/editor test -- src/extensions/paragraph/__tests__/chinese-typography.test.ts
           cd apps/mobile
           npx tsc --noEmit
       - name: Build production APK without uploading signing secrets
