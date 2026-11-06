@@ -10,6 +10,8 @@ test("Android installs separately and can build unsigned production APKs", () =>
   assert.match(gradle, /applicationId "app\.selftalk\.notes"/);
   assert.match(gradle, /build_config_package.*com\.streetwriters\.notesnook/);
   assert.match(gradle, /universalApk true/);
+  assert.match(gradle, /enableSeparateBuildPerCPUArchitecture = false/);
+  assert.match(gradle, /abiFilters \(\*reactNativeArchitectures\(\)\)/);
   assert.match(gradle, /!project\.hasProperty\("unsignedRelease"\)/);
 });
 
