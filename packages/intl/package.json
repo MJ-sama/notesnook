@@ -24,6 +24,7 @@
     "url": "git://github.com/streetwriters/notesnook.git"
   },
   "scripts": {
+    "test:zh-CN": "node --test tests/zh-CN.test.cjs",
     "extract": "lingui extract --clean --overwrite",
     "compile": "lingui compile --typescript",
     "build-locale": "node scripts/generate-strings.mjs && node scripts/generate-locale-loaders.mjs && npm run extract && npm run compile",

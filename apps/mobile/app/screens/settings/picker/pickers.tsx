@@ -38,6 +38,8 @@ import { verifyUserWithApplock } from "../functions";
 import PaywallSheet from "../../../components/sheets/paywall";
 import {
   AVAILABLE_LANGUAGES,
+  i18n,
+  languageLabel,
   strings
 } from "@notesnook/intl";
 import { initLocale } from "../../../common/locale";
@@ -99,7 +101,7 @@ export const LanguagePicker = createSettingsPicker<
       return strings.auto();
     }
     const found = AVAILABLE_LANGUAGES.find((l) => l.code === code);
-    return found ? `${found.label} (${found.nativeLabel})` : code;
+    return found ? languageLabel(found, i18n.locale) : code;
   },
   getItemKey: (item) => (typeof item === "object" ? item.code : item),
   options: [

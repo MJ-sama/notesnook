@@ -180,6 +180,8 @@ export type NotebookReference = {
 
 export interface Note extends BaseItem<"note"> {
   title: string;
+  titleFontFamily?: string | null;
+  titleFontSize?: number | null;
   headline?: string;
   contentId?: string;
 

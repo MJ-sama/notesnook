@@ -76,6 +76,25 @@ test("add note", () =>
     expect(await db.notes.exists(id)).toBe(true);
   }));
 
+test("title typography belongs to its note and survives unrelated edits", () =>
+  databaseTest().then(async (db) => {
+    const id = await db.notes.add({
+      title: "A",
+      titleFontFamily: "kaiti",
+      titleFontSize: 32
+    });
+    const other = await db.notes.add({ title: "B" });
+    await db.notes.add({ id, title: "Renamed" });
+    expect(await db.notes.note(id)).toMatchObject({
+      titleFontFamily: "kaiti",
+      titleFontSize: 32
+    });
+    expect((await db.notes.note(other))?.titleFontSize == null).toBe(true);
+    await db.notes.add({ id, titleFontSize: null });
+    expect((await db.notes.note(id))?.titleFontSize == null).toBe(true);
+    expect((await db.notes.note(id))?.titleFontFamily).toBe("kaiti");
+  }));
+
 test("get note content", () =>
   noteTest().then(async ({ db, id }) => {
     const note = await db.notes.note(id);

@@ -20,6 +20,27 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import { keybindings } from "@notesnook/common";
 import { Editor, mergeAttributes, Node } from "@tiptap/core";
 import { NodeType } from "prosemirror-model";
+import type { EditorState } from "@tiptap/pm/state";
+
+// Only direct children of the document are body paragraphs. A list item,
+// table cell or quote can own paragraphs without being a formatting target.
+export function selectedBodyParagraphs({
+  doc,
+  selection
+}: Pick<EditorState, "doc" | "selection">) {
+  const paragraphs: { pos: number; indented: boolean }[] = [];
+  const { from, to, empty } = selection;
+  doc.nodesBetween(from, to, (node, pos) => {
+    if (
+      node.type.name === "paragraph" &&
+      (empty || node.content.size === 0 || pos + 1 !== to)
+    ) {
+      paragraphs.push({ pos, indented: node.attrs.firstLineIndent !== false });
+    }
+    return false;
+  });
+  return paragraphs;
+}
 
 export interface ParagraphOptions {
   HTMLAttributes: Record<string, unknown>;
@@ -33,6 +54,9 @@ declare module "@tiptap/core" {
        * Toggle a paragraph
        */
       setParagraph: () => ReturnType;
+    };
+    firstLineIndent: {
+      toggleFirstLineIndent: () => ReturnType;
     };
   }
 }
@@ -55,6 +79,25 @@ export const Paragraph = Node.create<ParagraphOptions>({
 
   addAttributes() {
     return {
+      firstLineIndent: {
+        // Plain paragraphs inherit the root-only CSS default. Persist an
+        // explicit opt-out so it survives saving and splitting a paragraph.
+        default: null,
+        keepOnSplit: true,
+        parseHTML: (element) => {
+          const indent = element.style.textIndent;
+          if (indent === "2em") return true;
+          return /^0(?:px|em|rem|%)?$/.test(indent) ? false : null;
+        },
+        renderHTML: (attributes) =>
+          attributes.firstLineIndent == null
+            ? {}
+            : {
+                style: `text-indent: ${
+                  attributes.firstLineIndent ? "2em" : "0px"
+                }`
+              }
+      },
       spacing: {
         keepOnSplit: false,
         default: getSpacing(this.options.doubleSpaced),
@@ -84,6 +127,20 @@ export const Paragraph = Node.create<ParagraphOptions>({
 
   addCommands() {
     return {
+      toggleFirstLineIndent:
+        () =>
+        ({ tr, dispatch }) => {
+          const paragraphs = selectedBodyParagraphs(tr);
+          if (!paragraphs.length) return false;
+          const enable = paragraphs.some((p) => !p.indented);
+          if (dispatch) {
+            for (const { pos, indented } of paragraphs) {
+              if (enable !== indented)
+                tr.setNodeAttribute(pos, "firstLineIndent", enable);
+            }
+          }
+          return true;
+        },
       setParagraph:
         () =>
         ({ commands }) => {

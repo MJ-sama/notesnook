@@ -22,7 +22,7 @@ import { actionErrors } from "../generated/action-errors";
 import { actions } from "../generated/actions";
 import { doActions } from "../generated/do-actions";
 import { inProgressActions } from "../generated/in-progress-actions";
-
+import { appText } from "./brand";
 const SEARCH_IN_ROUTE_STRINGS = {
   Notes: () => t`Search in Notes`,
   Notebooks: () => t`Search in Notebooks`,
@@ -428,7 +428,7 @@ $day$: Current day (eg. Monday)`,
     t`Let us know if you have faced any issue/bug while using Notesnook. We will try to fix it as soon as possible.`,
   migrationSaveBackup: () => t`Save a backup of your notes`,
   migrationSaveBackupDesc: () =>
-    t`Thank you for updating Notesnook! We will be applying some minor changes for a better note taking experience.`,
+    appText(t`Thank you for updating Notesnook! We will be applying some minor changes for a better note taking experience.`),
   moveNotebook: (count: number, title: string) =>
     plural(count, {
       one: `Moving ${title}`,
@@ -658,8 +658,8 @@ $day$: Current day (eg. Monday)`,
   loadFromFile: () => t`Load from file`,
   setAsDarkTheme: () => t`Set as dark theme`,
   setAsLightTheme: () => t`Set as light theme`,
-  defaultDarkThemeDesc: () => t`The default dark theme for the Notesnook app`,
-  defaultLightThemeDesc: () => t`The default light theme for Notesnook app.`,
+  defaultDarkThemeDesc: () => appText(t`The default dark theme for the Notesnook app`),
+  defaultLightThemeDesc: () => appText(t`The default light theme for Notesnook app.`),
   source: () => t`Source`,
   createAGroup: () => t`Create a group`,
   fileCheckFailed: (reason: string) =>
@@ -754,7 +754,7 @@ $day$: Current day (eg. Monday)`,
         () => t`privileged few`
       ],
       body: () =>
-        t`Your privacy matters to us, no matter who you are. In a world where everyone is trying to spy on you, Notesnook encrypts all your data before it leaves your device. With Notesnook no one can ever sell your data again.`
+        appText(t`Your privacy matters to us, no matter who you are. In a world where everyone is trying to spy on you, Notesnook encrypts all your data before it leaves your device. With Notesnook no one can ever sell your data again.`)
     },
     {
       tesimonial: () =>
@@ -1002,16 +1002,16 @@ $day$: Current day (eg. Monday)`,
     [
       t`Use this if changes from other devices are not appearing on this device. This will overwrite the data on this device with the latest data from the server.`,
       "",
-      t`This must only be used for troubleshooting. Using it regularly for sync is not recommended and will lead to unexpected data loss and other issues. If you are having persistent issues with sync, please report them to us at support@streetwriters.co.`
+      t`This must only be used for troubleshooting. Using it regularly for sync is not recommended and will lead to unexpected data loss and other issues.`
     ].join("\n"),
   forceSyncNotice: () =>
-    t`This must only be used for troubleshooting. Using this regularly for sync is not recommended and will lead to unexpected data loss and other issues. If you are having persistent issues with sync, please report them to us at support@streetwriters.co.`,
+    t`This must only be used for troubleshooting. Using this regularly for sync is not recommended and will lead to unexpected data loss and other issues.`,
   forcePushChanges: () => t`Force push changes`,
   forcePushChangesDesc: () =>
     [
       t`Use this if changes made on this device are not appearing on other devices. This will overwrite the data on the server with the data from this device.`,
       "",
-      t`This must only be used for troubleshooting. Using it regularly for sync is not recommended and will lead to unexpected data loss and other issues. If you are having persistent issues with sync, please report them to us at support@streetwriters.co.`
+      t`This must only be used for troubleshooting. Using it regularly for sync is not recommended and will lead to unexpected data loss and other issues.`
     ].join("\n"),
   start: () => t`Start`,
   customization: () => t`Customization`,
@@ -1186,7 +1186,7 @@ $day$: Current day (eg. Monday)`,
   privacyPolicy: () => t`Privacy policy`,
   privacyPolicyDesc: () => t`Read the privacy policy`,
   licenses: () => t`Open source licenses`,
-  ossLibs: () => t`Open source libraries used in Notesnook`,
+  ossLibs: () => appText(t`Open source libraries used in Notesnook`),
   about: () => t`About`,
   downloadOnDesktop: () => t`Download on desktop`,
   downloadOnDesktopDesc: () =>
@@ -1277,7 +1277,7 @@ $day$: Current day (eg. Monday)`,
   disable: () => t`Disable`,
   notificationsDisabled: () => t`Notifications disabled`,
   notificationsDisabledDesc: () =>
-    t`Reminders cannot be set because notifications have been disabled from app settings. If you want to keep receiving reminder notifications, enable notifications for Notesnook from app settings.`,
+    appText(t`Reminders cannot be set because notifications have been disabled from app settings. If you want to keep receiving reminder notifications, enable notifications for Notesnook from app settings.`),
   openSettings: () => t`Open settings`,
   close: () => t`Close`,
   emailConfirmationLinkSent: () =>
@@ -1466,7 +1466,7 @@ For example:
   noteTitle: () => t`Note title`,
   changesNotSaved: () => t`Your changes could not be saved`,
   savingNoteTakingTooLong: () =>
-    t`Saving this note is taking too long. Copy your changes and restart the app to prevent data loss. If the problem persists, please report it to us at support@streetwriters.co.`,
+    t`Saving this note is taking too long. Copy your changes and restart the app to prevent data loss.`,
   changesNotSavedDesc: () =>
     t`It seems that your changes could not be saved. What to do next:`,
   changesNotSavedStep1: () =>
@@ -1579,7 +1579,7 @@ For example:
   checkingForUpdates: () => t`Checking for updates`,
   updating: (percentage: number) => t`${percentage}% updating...`,
   updateCompleted: (version: string) =>
-    `v${version} downloaded (click to install)`,
+    t`v${version} downloaded (click to install)`,
   updateNewVersionAvailable: (version: string) => t`v${version} available`,
   unlocking: () => t`Unlocking`,
   reminderStarts: (date: string, time: string) =>
@@ -1606,7 +1606,7 @@ For example:
     fallback: "app" | "sms" | "email",
     primary: "app" | "sms" | "email"
   ) =>
-    `You will now receive your 2FA codes on your ${strings[
+    t`You will now receive your 2FA codes on your ${strings[
       fallback
     ]().toLocaleLowerCase()} in case you lose access to your ${strings[
       primary
@@ -1637,7 +1637,7 @@ For example:
   yourFullName: () => t`Your full name`,
   memberSince: (date: string) => t`Member since ${date}`,
   betaLoginNotice: () =>
-    t`You are logging into the beta version of Notesnook. Switching between beta &amp; stable versions can cause weird issues including data loss. It is recommended that you do not use both simultaneously.`,
+    appText(t`You are logging into the beta version of Notesnook. Switching between beta &amp; stable versions can cause weird issues including data loss. It is recommended that you do not use both simultaneously.`),
   loggingIn: () => t`Logging you in`,
   pleaseWaitLogin: () => t`Please wait while you are authenticated.`,
   emailConfirmed: () => t`Your email has been confirmed.`,
@@ -1723,7 +1723,7 @@ All attachments will be downloaded & cached again on access.
 
 ---
 
-**Only use this for troubleshooting purposes. If you are having persistent issues, it is recommended that you reach out to us via support@streetwriters.co so we can help you resolve it permanently.**`,
+**Only use this for troubleshooting purposes.**`,
   cacheCleared: () => t`Attachments cache cleared!`,
   gettingEncryptionKey: () => t`Getting encryption key...`,
   keyBackedUp: () => t`I have saved my key`,
@@ -1913,10 +1913,10 @@ Please note that we will respond to your feature request on the link above. **We
   desktopIntegration: () => t`Desktop integration`,
   autoStartOnSystemStartup: () => t`Auto start on system startup`,
   autoStartDescription: () =>
-    t`If true, Notesnook will automatically start up when you turn on & login to your system.`,
+    appText(t`If true, Notesnook will automatically start up when you turn on & login to your system.`),
   startMinimized: () => t`Start minimized`,
   startMinimizedDescription: () =>
-    t`If true, Notesnook will start minimized to either the system tray or your system taskbar/dock. This setting only works with Auto start on system startup is enabled.`,
+    appText(t`If true, Notesnook will start minimized to either the system tray or your system taskbar/dock. This setting only works with Auto start on system startup is enabled.`),
   minimizeToSystemTray: () => t`Minimize to system tray`,
   minimizeToSystemTrayDescription: () =>
     t`Pressing "—" will hide the app in your system tray.`,
@@ -1946,7 +1946,7 @@ Please note that we will respond to your feature request on the link above. **We
   privacy: () => t`Privacy`,
   other: () => t`Other`,
   newVersionAvailable: (version: string) =>
-    `New version (v${version}) is available for download.`,
+    t`New version (v${version}) is available for download.`,
   installUpdate: () => t`Install update`,
   sourceCode: () => t`Source code`,
   sourceCodeDescription: () =>
@@ -1971,12 +1971,12 @@ Please note that we will respond to your feature request on the link above. **We
   advanced: () => t`Advanced`,
   useCustomDns: () => t`Use custom DNS`,
   customDnsDescription: () =>
-    t`Notesnook uses the following DNS providers:
+    appText(t`Notesnook uses the following DNS providers:
 
 1. Cloudflare DNS
 2. Quad9
 
-This can sometimes bypass local ISP blockages on Notesnook traffic. Disable this if you want the app to use system's DNS settings.`,
+This can sometimes bypass local ISP blockages on Notesnook traffic. Disable this if you want the app to use system's DNS settings.`),
   changeProxy: () => t`Change proxy`,
   proxy: () => t`Proxy`,
   proxyDescription: () =>
@@ -2015,7 +2015,7 @@ Use this if changes made on this device are not appearing on other devices. This
 Force pull:
 Use this if changes from other devices are not appearing on this device. This will overwrite the data on this device with the latest data from the server.
 
-**These must only be used for troubleshooting. Using them regularly for sync is not recommended and will lead to unexpected data loss and other issues. If you are having persistent issues with sync, please report them to us at support@streetwriters.co.**`,
+**These must only be used for troubleshooting. Using them regularly for sync is not recommended and will lead to unexpected data loss and other issues.**`,
   checkingAttachments: () => t`Checking attachments`,
   orderId: () => t`Order ID`,
   amount: () => t`Amount`,
@@ -2046,7 +2046,7 @@ Use this if changes from other devices are not appearing on this device. This wi
   pasteAndMatchStyle: () => t`Paste and match style`,
   pasteWithoutFormatting: () => t`Paste without formatting`,
   configure: () => t`Configure`,
-  usingOfficialInstance: () => t`Using official Notesnook instance`,
+  usingOfficialInstance: () => t`Using Notesnook official servers`,
   usingInstance: (instance: string, version: string) =>
     t`Using ${instance} (v${version})`,
 
@@ -2071,6 +2071,9 @@ Use this if changes from other devices are not appearing on this device. This wi
   numberedList: () => t`Numbered list`,
   checklist: () => t`Checklist`,
   fontFamily: () => t`Font family`,
+  noteTitleStyle: () => t`Title style`,
+  noteTitleFont: () => t`Title font`,
+  noteTitleSize: () => t`Title font size`,
   fontSize: () => t`Font size`,
   headings: () => t`Headings`,
   alignCenter: () => t`Align center`,
@@ -2108,6 +2111,7 @@ Use this if changes from other devices are not appearing on this device. This wi
   imageProperties: () => t`Image properties`,
   previewAttachment: () => t`Preview attachment`,
   more: () => t`More`,
+  moreEditorTools: () => t`More editor tools`,
   attachmentSettings: () => t`Attachment settings`,
   downloadAttachment: () => t`Download attachment`,
   embedSettings: () => t`Embed settings`,
@@ -2121,6 +2125,7 @@ Use this if changes from other devices are not appearing on this device. This wi
   openSource: () => t`Open source`,
   outdent: () => t`Lift list item`,
   indent: () => t`Sink list item`,
+  firstLineIndent: () => t`First-line indent (2 characters)`,
 
   chooseBlockToInsert: () => t`Choose a block to insert`,
   horizontalRule: () => t`Horizontal rule`,
@@ -2198,7 +2203,7 @@ Use this if changes from other devices are not appearing on this device. This wi
   failed: () => t`Failed`,
   cacheClearedDesc: () => t`All cached attachments have been cleared.`,
   restoreBackupConfirm: () => t`Restore backup?`,
-  serversConfigurationDesc: () => t`Configure server URLs for Notesnook`,
+  serversConfigurationDesc: () => appText(t`Configure server URLs for Notesnook`),
   error: () => t`Error`,
   deleteContainingNotes: (count: number) =>
     plural(count, {
@@ -2381,7 +2386,7 @@ Use this if changes from other devices are not appearing on this device. This wi
   notesnookCircleDesc: () =>
     t`Notesnook Circle brings together trusted partners who share our commitment to privacy, transparency, and user freedom.`,
   trialUserCircleNotice: () =>
-    `Notesnook Circle is reserved for members with an active subscription. You'll get full access after your trial period is over and your subscription is confirmed.`,
+    t`Notesnook Circle is reserved for members with an active subscription. You'll get full access after your trial period is over and your subscription is confirmed.`,
   freeUserCircleNotice: () =>
     t`The Notesnook Circle is exclusive to subscribers. Please consider subscribing to gain access to Notesnook Circle and enjoy additional benefits.`,
   finishPurchaseInBrowser: () => t`Finish your purchase in the browser.`,
@@ -2389,7 +2394,7 @@ Use this if changes from other devices are not appearing on this device. This wi
   clickToDirectlyClaimPromo: () =>
     t`Click here to directly claim the promotion.`,
   loginToUploadAttachments: () =>
-    t`Login to upload attachments. [Read more](https://notesnook.com/help/faqs/login-to-upload-attachments)`,
+    t`Login to upload attachments.`,
   views: () => t`Views`,
   noPassword: () => t`No password`,
   publishToTheWeb: () => t`Publish to the web`,
@@ -2503,7 +2508,7 @@ Use this if changes from other devices are not appearing on this device. This wi
   currentPasswordRequired: () => t`Current password required`,
   loginToRestoreAttachments: () => t`Login required to restore attachments`,
   loginToRestoreAttachmentsDesc: () =>
-    t`You need to login to restore attachments from a backup file. [Read more](https://notesnook.com/help/faqs/login-to-restore-attachments-in-backup).
+    t`You need to login to restore attachments from a backup file.
   
 Continue without attachments?`,
   pleaseLoginToDownloadAttachments: () =>
@@ -2546,7 +2551,7 @@ Continue without attachments?`,
   openingLocalFileDesc: (filePath: string) =>
     t`Are you sure you want to open this file: ${filePath}?`,
   cantOpenFileLinksInBrowsers: () =>
-    t`File links cannot be opened in browsers. Please use the Notesnook desktop app.`,
+    appText(t`File links cannot be opened in browsers. Please use the Notesnook desktop app.`),
   expiryDateMustBeInTheFuture: () => t`Expiry date must be in the future`,
   expiryDateCannotBeMoreThan1YearInTheFuture: () =>
     t`Expiry date cannot be more than 1 year in the future`,
@@ -2582,7 +2587,7 @@ Continue without attachments?`,
   versionDeleted: () => actions.deleted.version(1),
   offlineMode: () => t`Offline mode`,
   offlineModeDesc: () =>
-    t`Using Notesnook without an account will **NOT** sync your notes across devices and could result in data loss if you lose access to your device or uninstall the app. Make sure to backup your notes regularly.`,
+    appText(t`Using Notesnook without an account will **NOT** sync your notes across devices and could result in data loss if you lose access to your device or uninstall the app. Make sure to backup your notes regularly.`),
   alignment: () => t`Alignment`,
   whatAreMonographs: () => t`What are monographs?`,
   webTips: [
@@ -2638,11 +2643,6 @@ Continue without attachments?`,
       text: () =>
         t`Pin your most important Notebooks to the top from Notebook properties.`,
       contexts: ["notebooks"]
-    },
-    {
-      text: () =>
-        t`We value your feedback so join us on Discord and share your experiences and ideas.`,
-      contexts: ["notes", "notebooks", "tags"]
     },
     {
       text: () =>
@@ -2829,7 +2829,7 @@ Continue without attachments?`,
   wrappedYear: (year: number | string) => t`Wrapped ${year} 🎉`,
   yourYearWrapped: (year: number | string) => t`Your ${year} Wrapped`,
   letsLookBackAtYourYearInNotesnook: () =>
-    t`Let's look back at your year in Notesnook`,
+    appText(t`Let's look back at your year in Notesnook`),
   youCreated: () => t`You created`,
   notesThisYear: () => t`notes this year`,
   wrappedNotesSubtext: () =>
@@ -3041,7 +3041,7 @@ Continue without attachments?`,
   exportingNotePath: (path: string) => t`Exporting note: ${path}`,
   focusedOnPrivacy: () => t`Focused on privacy`,
   focusedOnPrivacyDesc: () =>
-    t`Everything you do in Notesnook stays private. We use XChaCha20-Poly1305-IETF and Argon2 to encrypt your notes.`,
+    appText(t`Everything you do in Notesnook stays private. We use XChaCha20-Poly1305-IETF and Argon2 to encrypt your notes.`),
   zeroAdsAndZeroTrackers: () => t`Zero ads & zero trackers`,
   onDeviceEncryption: () => t`On device encryption`,
   secureAppLockForAll: () => t`Secure app lock for all`,
@@ -3263,7 +3263,7 @@ Continue without attachments?`,
   moveNodeUp: () => t`Move parent node up`,
   moveNodeDown: () => t`Move parent node down`,
   clearCurrentLine: () => t`Clear current line`,
-  welcomeToNotesnookBeta: () => t`Welcome to Notesnook Beta!`,
+  welcomeToNotesnookBeta: () => appText(t`Welcome to Notesnook Beta!`),
   highlightsWithStars: () => t`✨ Highlights ✨`,
   welcomeToVersion: (version: string) => t`Welcome to v${version}`,
   failedToGetInvoiceForTransaction: (error: string) =>
@@ -3282,5 +3282,35 @@ Continue without attachments?`,
   lastBackupOn: (date: string, type: "full" | "partial") =>
     type === "full"
       ? t`Last full backup: ${date}`
-      : t`Last partial backup: ${date}`
+      : t`Last partial backup: ${date}`,
+  testimonialDan: () =>
+    t`@notesnook app is what @evernote should have become long ago. And they're still improving.`,
+  testimonialJason: () =>
+    t`I work in content writing and communications. My day starts and ends in Notesnook. My Chrome app is always open; it's where I take all my notes. The clean design, focus mode, the tagging and color coding are all features that help keep my work organised every day.`,
+  testimonialCameron: () =>
+    t`I'm pretty impressed at the progress @notesnook are making on their app — particularly in respect to how performant the app runs and behaves, despite the overhead of end-to-end encrypting user data.`,
+  instantPrivateSync: () => t`Instant private sync`,
+  unlimitedNotebooks: () => t`Unlimited notebooks`,
+  unlimitedTags: () => t`Unlimited tags`,
+  encryptedAttachmentsLabel: () => t`Encrypted attachments`,
+  encryptedBackupsLabel: () => t`Encrypted backups`,
+  securePrivateVault: () => t`Secure private vault`,
+  exportToPdfLabel: () => t`Export to PDF`,
+  richTextEditor: () => t`Rich text editor`,
+  legacyPlanLabel: () => t`Pro (legacy)`,
+  noChangelog: () => t`No changelog found.`,
+  planOnTrial: (plan: string) => t`${plan} (trial)`,
+  windowsProxyDescription: () => appText(t`Choose how Notesnook connects to the network. Save to apply without restarting.`),
+  followSystemProxy: () => t`Follow Windows proxy settings (default)`,
+  forceDirectConnection: () => t`Force a direct connection`,
+  manualProxy: () => t`Manual proxy`,
+  proxyAddress: () => t`Proxy address`,
+  invalidProxyAddress: () => t`Enter a valid HTTP, HTTPS or SOCKS proxy address without credentials.`,
+  proxySettingsError: () => t`Could not load or apply the proxy settings.`,
+  editorBackground: () => t`Editor background`,
+  editorBackgroundDescription: () => t`Use a local image for all notes on this device. Higher transparency makes the image fainter without changing the text.`,
+  editorBackgroundChoose: () => t`Choose background image`,
+  editorBackgroundTransparency: () => t`Background transparency`,
+  editorBackgroundInvalid: () => t`Choose a valid PNG, JPEG or WebP image no larger than 12 MB.`,
+  editorBackgroundSaveError: () => t`Could not read or save the local background settings.`
 };

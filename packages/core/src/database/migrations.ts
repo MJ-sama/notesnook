@@ -524,6 +524,22 @@ export class NNMigrationProvider implements MigrationProvider {
               .execute();
           }
         }
+      },
+      "a-2026-11-05-selftalk-title-style": {
+        async up(db) {
+          await ensureColumn(db, "notes", "titleFontFamily", () =>
+            db.schema
+              .alterTable("notes")
+              .addColumn("titleFontFamily", "text")
+              .execute()
+          );
+          await ensureColumn(db, "notes", "titleFontSize", () =>
+            db.schema
+              .alterTable("notes")
+              .addColumn("titleFontSize", "integer")
+              .execute()
+          );
+        }
       }
     };
   }

@@ -35,6 +35,28 @@ const getFontsList = () => [
     title: strings.serif(),
     id: "serif",
     font: `Noto Serif, Times New Roman, serif`
+  },
+  {
+    title: "微软雅黑",
+    id: "microsoft-yahei",
+    font: '"Microsoft YaHei", "微软雅黑", "PingFang SC", sans-serif'
+  },
+  { title: "宋体", id: "simsun", font: 'SimSun, "宋体", "Songti SC", serif' },
+  { title: "楷体", id: "kaiti", font: 'KaiTi, "楷体", "Kaiti SC", serif' },
+  {
+    title: "仿宋",
+    id: "fangsong",
+    font: 'FangSong, "仿宋", STFangsong, serif'
+  },
+  {
+    title: "黑体",
+    id: "simhei",
+    font: 'SimHei, "黑体", "Heiti SC", sans-serif'
+  },
+  {
+    title: "等线",
+    id: "dengxian",
+    font: 'DengXian, "等线", "Microsoft YaHei", sans-serif'
   }
 ];
 

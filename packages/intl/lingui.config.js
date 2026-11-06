@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 module.exports = {
   locales: [
     "en",
+    "zh-CN",
     "pseudo-LOCALE",
     "de",
     "es",
@@ -37,6 +38,7 @@ module.exports = {
   pseudoLocale: "pseudo-LOCALE",
   fallbackLocales: {
     "pseudo-LOCALE": "en",
+    "zh-CN": "en",
     de: "en",
     es: "en",
     fr: "en",

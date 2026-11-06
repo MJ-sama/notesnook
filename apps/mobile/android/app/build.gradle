@@ -135,7 +135,8 @@ android {
     }
     namespace "com.streetwriters.notesnook"
     defaultConfig {
-        applicationId "com.streetwriters.notesnook"
+        applicationId "app.selftalk.notes"
+        resValue "string", "build_config_package", "com.streetwriters.notesnook"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         multiDexEnabled true
@@ -154,7 +155,7 @@ android {
         abi {
             reset()
             enable enableSeparateBuildPerCPUArchitecture
-            universalApk false  // If true, also generate a universal APK
+            universalApk true
             include (*reactNativeArchitectures())
         }
     }
@@ -178,7 +179,7 @@ android {
             buildConfigField "boolean", "FDROID_BUILD", "${fdroidBuild()}"
         }
         release {
-            if (file("debug.keystore").exists()) {
+            if (!project.hasProperty("unsignedRelease") && file("debug.keystore").exists()) {
                 signingConfig signingConfigs.release
             }
             minifyEnabled enableProguardInReleaseBuilds

@@ -25,6 +25,7 @@ import { FileType } from "react-native-scoped-storage";
 import { create } from "zustand";
 import { ThemeDark, ThemeLight, ThemeDefinition } from "@notesnook/theme";
 import { DayFormat, WeekFormat, Reminder } from "@notesnook/core";
+import { DEFAULT_APP_LANGUAGE } from "@notesnook/intl";
 import { db } from "../common/database";
 import { EDITOR_LINE_HEIGHT } from "../utils/constants";
 import { ShortcutItem } from "react-native-actions-shortcuts";
@@ -157,6 +158,7 @@ export interface SettingStore {
 const { width, height } = Dimensions.get("window");
 
 export const defaultSettings: SettingStore["settings"] = {
+  appLanguage: DEFAULT_APP_LANGUAGE,
   applockKeyboardType: "numeric",
   appLockTimer: 0,
   showToolbarOnTop: false,
@@ -215,7 +217,8 @@ export const defaultSettings: SettingStore["settings"] = {
   backupType: "partial",
   fullBackupReminder: "never",
   lastFullBackupDate: 0,
-  checkForUpdates: true,
+  // Official APKs use a different application ID and signing certificate.
+  checkForUpdates: false,
   defaultLineHeight: EDITOR_LINE_HEIGHT.DEFAULT,
   imageCompression: "ask-every-time",
   keepScreenOn: true

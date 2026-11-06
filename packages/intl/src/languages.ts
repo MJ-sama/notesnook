@@ -23,7 +23,23 @@ export type Language = {
   nativeLabel: string;
 };
 
+// An explicitly saved empty string still means “follow the system”.
+export const DEFAULT_APP_LANGUAGE = "zh-CN";
+
+export function languageLabel(language: Language, locale: string): string {
+  if (language.code === locale) return language.nativeLabel;
+  try {
+    const translated = new Intl.DisplayNames(locale, { type: "language" }).of(language.code);
+    if (translated && translated !== language.nativeLabel)
+      return `${translated} (${language.nativeLabel})`;
+  } catch {
+    // Older Android runtimes may not provide Intl.DisplayNames.
+  }
+  return language.nativeLabel;
+}
+
 export const AVAILABLE_LANGUAGES: Language[] = [
+  { code: "zh-CN", label: "Simplified Chinese", nativeLabel: "简体中文" },
   { code: "en", label: "English", nativeLabel: "English" },
   { code: "de", label: "German", nativeLabel: "Deutsch" },
   { code: "es", label: "Spanish", nativeLabel: "Español" },

@@ -169,6 +169,8 @@ export class Notes implements ICollection {
       if (isUpdating) {
         await this.collection.update([id], {
           title: item.title,
+          titleFontFamily: item.titleFontFamily,
+          titleFontSize: item.titleFontSize,
           headline: headline,
           contentId,
 
@@ -191,6 +193,8 @@ export class Notes implements ICollection {
           contentId,
 
           title: item.title,
+          titleFontFamily: item.titleFontFamily,
+          titleFontSize: item.titleFontSize,
           headline: headline,
 
           pinned: item.pinned,

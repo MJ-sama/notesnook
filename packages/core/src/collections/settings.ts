@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { makeId } from "../utils/id.js";
 import Database from "../api/index.js";
+import { i18n, strings } from "@notesnook/intl";
 import {
   GroupOptions,
   GroupingKey,
@@ -59,7 +60,9 @@ const defaultSettings: SettingItemMap = {
   dayFormat: "short",
   dateFormat: "DD-MM-YYYY",
   weekFormat: "Sun",
-  titleFormat: "Note $date$ $time$",
+  get titleFormat() {
+    return `${i18n.locale ? strings.note() : "Note"} $date$ $time$`;
+  },
   defaultNotebook: undefined,
   defaultTag: undefined,
   trashCleanupInterval: 7,

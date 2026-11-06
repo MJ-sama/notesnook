@@ -39,18 +39,6 @@ export async function setupDatabase(password?: string) {
   const key = await getDatabaseKey(password);
   if (!key) throw new Error(strings.databaseSetupFailed());
 
-  // const base = `http://192.168.100.92`;
-
-  // database.host({
-  //   API_HOST: `${base}:5264`,
-  //   AUTH_HOST: `${base}:8264`,
-  //   SSE_HOST: `${base}:7264`,
-  //   ISSUES_HOST: `${base}:2624`,
-  //   SUBSCRIPTIONS_HOST: `${base}:9264`,
-  //   MONOGRAPH_HOST: `${base}:6264`,
-  //   NOTESNOOK_HOST: `${base}:8788`
-  // });
-
   database.host({
     API_HOST: "https://api.notesnook.com",
     AUTH_HOST: "https://auth.streetwriters.co",
